@@ -1,6 +1,8 @@
 package com.surajgautam.reactive.model;
 
 import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 
@@ -8,8 +10,10 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Getter
 @Setter
+@Document("students")
 public class Student implements Serializable {
-    private long id;
+    @Id
+    private String id;
     private String fullName;
     private String universityName;
 }
