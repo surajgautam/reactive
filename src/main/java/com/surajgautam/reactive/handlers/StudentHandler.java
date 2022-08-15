@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.UUID;
@@ -41,5 +42,11 @@ public class StudentHandler {
         student.setFullName(studentRequest.getFullName());
         student.setUniversityName(studentRequest.getUniversityName());
         return student;
+    }
+
+    public Mono<ServerResponse> getStudents() {
+        return ServerResponse.status(HttpStatus.OK)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(this.repository.findAll(), Student.class);
     }
 }

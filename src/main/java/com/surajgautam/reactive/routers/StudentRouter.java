@@ -13,14 +13,19 @@ import static org.springframework.web.reactive.function.server.RequestPredicates
 
 @Configuration
 @RequiredArgsConstructor
-public class StudentRouters {
+public class StudentRouter {
 
     private final StudentHandler handler;
 
     @Bean
-    public RouterFunction<ServerResponse> getStudents() {
+    public RouterFunction<ServerResponse> getStudentById() {
         return RouterFunctions.route(GET("/students/{id}"), request ->
                 this.handler.getStudentById(request.pathVariable("id")));
+    }
+
+    @Bean
+    public RouterFunction<ServerResponse> getStudents() {
+        return RouterFunctions.route(GET("/students"), request -> this.handler.getStudents());
     }
 
     @Bean
